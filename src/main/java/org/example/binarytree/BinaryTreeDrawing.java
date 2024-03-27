@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
@@ -61,11 +62,17 @@ public class BinaryTreeDrawing extends Application {
             drawTreeInit(gc);
         });
 
+        Button cancelButton = new Button("Cancel");
+        cancelButton.setOnAction(e -> primaryStage.close());
+
         slidersBox.getChildren().addAll(angleLabel, angleSlider, depthLabel, depthSlider);
+
+        VBox bottom = new VBox(slidersBox, cancelButton);
 
         BorderPane root = new BorderPane();
         root.setCenter(canvas);
-        root.setBottom(slidersBox);
+        BorderPane.setAlignment(slidersBox, Pos.CENTER);
+        root.setBottom(bottom);
 
         primaryStage.setTitle("Binary Tree Drawing");
         primaryStage.setScene(new Scene(root, 1200, 900));
